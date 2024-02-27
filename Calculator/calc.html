@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="calc.css">
+	<script src="calc.js"></script>
+</head>
+<body>
+	<form name="form" onkeydown="return()">
+		<div class="calculator">
+			<table>
+				<tr><td colspan="4"><input class="display3" type="text" name="txt3" id="txt3"></td></tr>
+				<tr><td colspan="4"><input class="display2" type="text" name="txt2" id="txt2"></td></tr>
+				<tr><td colspan="4"><input class="display4" type="text" name="txt4" id="txt4"></td></tr>
+				<tr>
+					<td><input  class="clear" type="button" name="btnclear" value="AC" onclick="btnclearf(btnclear.value)"></td>
+					<td><input class="symb" type="button" name="btnparan" value="()" onclick="btnparanf()"></td>
+					<td><input class="symb" type="button" name="btnpercent" value="%" onclick="btnmultiplydivisionf(btnpercent.value)"></td>
+					<td><input class="symb" type="button" name="btndivision" value="&#247" onclick="btnmultiplydivisionf(btndivision.value)"></td>
+				</tr>
+				<tr>
+					<td><input class="no" type="button" name="btn7" value="7" onclick="btnno(btn7.value)"></td>
+					<td><input class="no" type="button" name="btn8" value="8" onclick="btnno(btn8.value)"></td>
+					<td><input class="no" type="button" name="btn9" value="9" onclick="btnno(btn9.value)"></td>
+					<td><input class="symb" type="button" name="btnmultiply" value="&#215" onclick="btnmultiplydivisionf(btnmultiply.value)"></td>
+				</tr>
+				<tr>
+					<td><input class="no" type="button" name="btn4" value="4" onclick="btnno(btn4.value)"></td>
+					<td><input class="no" type="button" name="btn5" value="5" onclick="btnno(btn5.value)"></td>
+					<td><input class="no" type="button" name="btn6" value="6" onclick="btnno(btn6.value)"></td>
+					<td><input class="symb" type="button" name="btnsubtract" value="-" onclick="btnaddsubtractf(btnsubtract.value)">
+				</tr>
+				<tr>
+					<td><input class="no" type="button" name="btn1" value="1" onclick="btnno(btn1.value)"></td>
+					<td><input class="no" type="button" name="btn2" value="2" onclick="btnno(btn2.value)"></td>
+					<td><input class="no" type="button" name="btn3" value="3" onclick="btnno(btn3.value)"></td>
+					<td><input class="symb" type="button" name="btnadd" value="+" onclick="btnaddsubtractf(btnadd.value)"></td>
+				</tr>
+				<tr>
+					<td><input class="no" type="button" name="btn0" value="0" onclick="btnno(btn0.value)"></td>
+					<td><input class="no" type="button" name="btndeci" value="." onclick="btndecif(btndeci.value)"></td>
+					<td><input class="no" type="button" name="btndelete" value="Del" onclick="btndeletef()"></td>
+					<td><input class="equal" type="button" name="btnequal" value="=" onclick="btnequalf()"></td>
+				</tr>
+				<tr>
+					<td colspan="4"><input class="display1" type="text" name="txt1" id="txt1"></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

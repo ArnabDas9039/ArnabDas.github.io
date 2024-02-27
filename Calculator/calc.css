@@ -1,0 +1,67 @@
+html{
+	font-family: Product Sans;
+}
+.clear{
+	background-color: #bde9fc;
+	color:black;
+	height: 50px;
+	width: 50px;
+	font-size: 20px;
+	margin: 0px;
+	border-radius: 25px;
+	border-width: 0px;
+	font-family: inherit;
+}
+.no{
+	background-color: #eff4ee;
+	color:black;
+	height: 50px;
+	width: 50px;
+	font-size: 20px;
+	margin: 0px;
+	border-radius: 25px;
+	border-width: 0px;
+	font-family: inherit;
+}
+.symb{
+	background-color: #d5e8d7;
+	color:black;
+	height: 50px;
+	width: 50px;
+	font-size: 20px;
+	margin: 0px;
+	border-radius: 25px;
+	border-width: 0px;
+	font-family: inherit;
+}
+.display2{
+	background-color: #d5e8d7;
+	font-size: 40px;
+	width: 210px;
+	height: 100px;
+	color: black;
+	text-align: right;
+	border-width: 0px;
+	border-radius: 25px;
+	font-family: inherit;
+}
+.display3,.display1,.display4{
+	background-color: #d5e8d7;
+	font-size: 20px;
+	width: 210px;
+	height: 50px;
+	color: black;
+	text-align: right;
+	border-width: 0px;
+	border-radius: 25px;
+	font-family: inherit;
+}
+.equal{
+	background-color: #a9f4c1;
+	height: 50px;
+	width: 50px;
+	font-size: 20px;
+	border-radius: 25px;
+	border-width: 0px;
+	font-family: inherit;
+}
