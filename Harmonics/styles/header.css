@@ -1,0 +1,40 @@
+.header{
+    background-color: var(--md-sys-color-surface);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.logo-section{
+    padding: 0 0 0 12px;
+}
+.logo{
+    margin: 20px 0 0 px;
+    height: 24px;
+    width: 24px;
+}
+.search-section{
+    flex: 1;
+    padding: 0 12px 0 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.profile-section{
+    padding: 0 12px 0 0;
+}
+.profile-icon{
+    background-color: inherit;
+    border: 0;
+    border-radius: 20px;
+}
+.profile-icon-image{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}

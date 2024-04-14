@@ -22,6 +22,7 @@
     background-color: lightgray;
 }
 .icon{
+    margin-top: 0;
 }
 .icon-label{
     font-size: 10px;
@@ -50,7 +51,7 @@
         padding-bottom: 0;
     }
     .icon{
-        margin-top: ;
+        margin-top: 0;
     }
     .icon img{
         height: 25px;

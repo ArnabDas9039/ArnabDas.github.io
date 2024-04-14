@@ -1,0 +1,85 @@
+.navigation{
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    display: flex;
+    position: fixed;
+    z-index: 1;
+}
+.nav-button{
+    display: flex;
+}
+.nav-button:hover{
+    background-color: var(--md-sys-color-secondary-container);
+}
+.icon{
+    margin-top: 0;
+}
+.icon-label{
+    font-size: 16px;
+}
+/* Navigation Rail */
+@media (min-width: 600px) and (max-width: 1199px){
+    .navigation{
+        flex-direction: column;
+        width: 80px;
+        top: 64px;
+        left: 0;
+        bottom: 0;
+        align-items: center;
+        justify-content: start;
+    }
+    .nav-button{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        width: 70px;
+        padding: 5 0 5 0;
+        border-radius: 15px;
+    }
+}
+
+/* Navigation Drawer */
+@media (min-width: 1200px){
+    .navigation{
+        flex-direction: column;
+        top: 64px;
+        left: 0;
+        bottom: 0;
+        width: 236px;
+        align-items: start;
+        justify-content: start;
+        padding: 0 12px 0 12px;
+    }
+    .nav-button{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: inherit;
+        height: 56px;
+        /* margin: 0 12px 0 12px; */
+        border-radius: 28px;
+    }
+    .icon{
+        padding-left: 16px;
+    }
+    .icon-label{
+        flex: 1;
+        margin-left: 20px;
+    }
+}
+
+/* Navigation Bar */
+/* @media (){
+
+} */
+
+/* Navigation Tabs(TV) */
+/* {
+
+} */
+
+/* Navigation Tabs(auto) */
+/* {
+    
+} */
