@@ -4,7 +4,6 @@
     display: flex;
     /* position: absolute; */
     position: fixed;
-    z-index: 1;
     transition: width 0.2s;
 }
 .nav-button{
@@ -57,13 +56,13 @@
 @media (min-width: 1200px){
     .navigation{
         flex-direction: column;
-        top: 64px;
+        top: 0px;
         left: 0;
         bottom: 0;
         width: 216px;
         align-items: start;
         justify-content: start;
-        padding: 12px 12px 12px 12px;
+        padding: 76px 12px 12px 12px;
     }
     .nav-button{
         flex-direction: row;
@@ -202,7 +201,7 @@
     }
 } */
 
-/* Floating Navigation Rail (VR) */
+/* Floating Navigation Rail (XR) */
 /* @media (){
     .navigation{
         flex-direction: column;

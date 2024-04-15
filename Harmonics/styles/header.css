@@ -1,35 +1,29 @@
 .header{
-    background-color: var(--md-sys-color-surface);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 64px;
-    position: fixed;
     top: 0;
-    left: 0;
+    left: 240px;
     right: 0;
-    z-index: 1;
+    padding-left: 20px;
 }
-.logo-section{
-    padding: 0 0 0 12px;
+.left-section{
+    padding: 12px;
+    padding-left: 20px;
 }
-.logo{
-    margin: 20px 0 0 px;
-    height: 24px;
-    width: 24px;
+.top-destination{
+    font-size: 36px;
 }
-.search-section{
-    flex: 1;
-    padding: 0 12px 0 12px;
+.right-section{
+    width: 180px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
 }
-.profile-section{
-    padding: 0 12px 0 0;
+.search-icon{
 }
 .profile-icon{
-    background-color: inherit;
     border: 0;
     border-radius: 20px;
 }

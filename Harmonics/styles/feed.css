@@ -1,6 +1,7 @@
 /* Large and Extra Large */
 .feed{
     /* position: relative; */
+    padding-left: 20px;
     top: 64px;
     left: 240px;
 }
