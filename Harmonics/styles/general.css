@@ -4,115 +4,40 @@ body{
     font-family: Roboto, Arial;
     margin: 0;
     padding-left: 240px;
-    /* padding: 50px; */
-    /* display: flex;  */
-    /* Flex not in higher resolution */
-    /* align-items: center;
-    justify-content: center; */
+    transition: padding 0.2s;
 }
 .logo-section{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
-/* Large and Extra Large */
-/* .body{
-    position: relative;
-//    flex: 1;
-    margin: 50px;
-    border: 2px black solid;
-    width: 1200px;
-    height: 750px;
-//    1600:1000    
-//    aspect-ratio: 1.6;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
+.body{
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+}
+@media (min-width: 600px) and (max-width: 1200px){
+    body{
+        padding-left: 80px;
+    }
+}
 
-/* Medium and Expanded */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    width: 800px;
-    height: 500px;
-//    840:525
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
+@media (min-width: 1200px){
+    body{
+        padding-left: 240px;
+    }
+}
 
-/* Compact */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    width: 360px;
-    height: 800px;
-    360:800
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
-
-/* Television */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    width: 1600px;
-    height: 900px;
-//    3840:2160
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
-
-/* Auto */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    width: 800px;
-    height: 500px;
-    800:500
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
-
-/* XR */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    width: 800px;
-    height: 500px;
-    3840:2400
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
-
-/* Watch */
-/* .body{
-    position: relative;
-    margin: 50px;
-    border: 2px black solid;
-    border-radius: 120px;
-    width: 240px;
-    height: 240px;
-    240:240
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-} */
+@media (max-width: 600px){
+    body{
+        padding-left: 0px;
+    }
+    .body{
+        padding-top: 40%;
+    }
+    .logo-section{
+        top: 10%;
+        left: 50%;
+        right: 50%;
+    }
+}

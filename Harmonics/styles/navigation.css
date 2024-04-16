@@ -1,31 +1,32 @@
 .navigation{
-    background-color: var(--md-sys-color-surface);
-    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface-container);
     display: flex;
-    /* position: absolute; */
     position: fixed;
     transition: width 0.2s;
+    z-index: 1;
 }
 .nav-button{
     display: flex;
 }
-.icon{
+.navigation .icon{
     margin-top: 0;
 }
-.icon-label{
+.navigation .icon-label{
     font-size: 16px;
 }
+
 /* Navigation Rail */
-/* @media (min-width: 600px) and (max-width: 1199px){
+@media (min-width: 600px) and (max-width: 1200px){
     .navigation{
         flex-direction: column;
         width: 56px;
-        top: 64px;
+        top: 0;
         left: 0;
         bottom: 0;
         align-items: center;
         justify-content: start;
-        padding: 12px 12px 12px 12px;
+        padding: 76px 12px 12px 12px;
     }
     .nav-button{
         flex-direction: column;
@@ -36,7 +37,7 @@
         padding: 6px 0 6px 0;
         border-radius: 15px;
     }
-    .icon{
+    .navigation .icon{
         border-radius: 16px;
         width: 56px;
         height: 32px;
@@ -44,13 +45,15 @@
         justify-content: center;
         align-items: center;
     }
-    .icon:hover, .icon:active{
+    .navigation .icon:hover, .navigation .icon:active{
         background-color: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-surface-variant);
+        font-weight: bold;
     }
-    .icon-label{
+    .navigation .icon-label{
         font-size: 14px;
     }
-} */
+}
 
 /* Navigation Drawer */
 @media (min-width: 1200px){
@@ -74,19 +77,20 @@
     }
     .nav-button:hover{
         background-color: var(--md-sys-color-secondary-container);
-        text-decoration: bold;
+        color: var(--md-sys-color-on-surface-variant);
+        font-weight: bold;
     }
-    .icon{
+    .navigation .icon{
         padding-left: 16px;
     }
-    .icon-label{
+    .navigation .icon-label{
         flex: 1;
         margin-left: 20px;
     }
 }
 
 /* Navigation Bar */
-/* @media (){
+@media (max-width: 600px){
     .navigation{
         flex-direction: row;
         height: 56px;
@@ -106,7 +110,7 @@
         padding: 6px 0 6px 0;
         border-radius: 15px;
     }
-    .icon{
+    .navigation .icon{
         border-radius: 16px;
         width: 56px;
         height: 32px;
@@ -114,133 +118,12 @@
         justify-content: center;
         align-items: center;
     }
-    .icon:hover, .icon:active{
+    .navigation .icon:hover, .navigation .icon:active{
         background-color: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-surface-variant);
+        font-weight: bold;
     }
-    .icon-label{
+    .navigation .icon-label{
         font-size: 14px;
     }
-} */
-
-/* Navigation Tabs(TV) */
-/* @media (){
-    .navigation{
-        flex: 1;
-        position: static;
-        flex-direction: row;
-        width: 100px;
-        height: 32px;
-        top: 0;
-        left: 0;
-        right: 0;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 12px 12px 12px;
-    }
-    .nav-button{
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 24px;
-        padding: 6px 6px 6px 6px;
-        border-radius: 18px;
-    }
-    .icon{
-        border-radius: 16px;
-        width: 56px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .nav-button:hover, .nav-button:active{
-        background-color: var(--md-sys-color-secondary-container);
-    }
-    .icon-label{
-        font-size: 14px;
-    }
-} */
-
-/* Navigation Tabs(auto) */
-/* @media (){
-    .navigation{
-        flex: 1;
-        position: static;
-        flex-direction: row;
-        width: 100px;
-        height: 32px;
-        top: 0;
-        left: 0;
-        right: 0;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 12px 12px 12px;
-    }
-    .nav-button{
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 24px;
-        padding: 6px 6px 6px 6px;
-        border-radius: 18px;
-    }
-    .icon{
-        border-radius: 28px;
-        width: 56px;
-        height: 56px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .icon:hover, .icon:active{
-        background-color: var(--md-sys-color-secondary-container);
-    }
-    .icon-label{
-        font-size: 14px;
-        opacity: 0;
-    }
-} */
-
-/* Floating Navigation Rail (XR) */
-/* @media (){
-    .navigation{
-        flex-direction: column;
-        width: 56px;
-        border-radius: 40px;
-        left: -82px;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 12px 12px 12px;
-    }
-    .nav-button{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 56px;
-        height: 72px;
-        padding: 6px 6px 6px 6px;
-        border-radius: 18px;
-    }
-    .icon{
-        border-radius: 28px;
-        width: 56px;
-        height: 56px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .icon:hover, .icon:active{
-        background-color: var(--md-sys-color-secondary-container);
-    }
-    .icon-label{
-        font-size: 14px;
-        opacity: 0;
-    }
-} */
-
-/* Watch */
-/* @media (){
-    .navigation{
-        opacity: 0;
-    }
-} */
+}
