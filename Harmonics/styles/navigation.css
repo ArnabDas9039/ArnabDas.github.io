@@ -3,17 +3,21 @@
     color: var(--md-sys-color-on-surface-container);
     display: flex;
     position: fixed;
-    transition: width 0.2s;
+    transition: width 0.15s;
     z-index: 1;
 }
 .nav-button{
     display: flex;
+    padding: 6px 0 6px 0;
 }
 .navigation .icon{
     margin-top: 0;
 }
 .navigation .icon-label{
     font-size: 16px;
+}
+.playlists{
+    opacity: 0;
 }
 
 /* Navigation Rail */
@@ -86,6 +90,21 @@
     .navigation .icon-label{
         flex: 1;
         margin-left: 20px;
+    }
+    .playlists{
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 76px 0;
+        width: 100%;
+    }
+    .playlists .nav-button{
+        justify-content: start;
+    }
+    .playlist-label{
+        padding: 40px;
     }
 }
 
