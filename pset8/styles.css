@@ -1,0 +1,81 @@
+@font-face {
+    font-family: formula1;
+    src: url(formula1.ttf);
+}
+
+@font-face {
+    font-family: formula1bold;
+    src: url(formula1bold.ttf);
+}
+
+.year {
+    font-family: formula1bold;
+    color: white;
+    font-size: 24px;
+}
+
+.navbar {
+    background-color: red;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: white;
+}
+
+.heading {
+    padding-left: 80px;
+    font-family: formula1bold;
+    font-weight: 900;
+    font-size: 62px;
+}
+
+.alpine:hover {
+    border: 2px solid #0093cc;
+    color: #0093cc;
+}
+
+.aston:hover {
+    border: 2px solid #229971;
+    color: #229971;
+}
+
+.ferrari:hover {
+    border: 2px solid #e80020;
+    color: #e80020;
+}
+
+.haas:hover {
+    border: 2px solid #b6babd;
+    color: #b6babd;
+}
+
+.kick:hover {
+    border: 2px solid #52e252;
+    color: #52e252;
+}
+
+.mclaren:hover {
+    border: 2px solid #ff8000;
+    color: #ff8000;
+}
+
+.mercedes:hover {
+    border: 2px solid #27f4d2;
+    color: #27f4d2;
+}
+
+.rb:hover {
+    border: 2px solid #6692ff;
+    color: #6692ff;
+}
+
+.redbull:hover {
+    border: 2px solid #3671c6;
+    color: #3671c6;
+}
+
+.williams:hover {
+    border: 2px solid #64c4ff;
+    color: #64c4ff;
+}

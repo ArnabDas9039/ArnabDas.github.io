@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link href="styles.css" rel="stylesheet">
+    <title>Schedule</title>
+    <style type="text/css">
+        .schedule-list {
+            margin: 0;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .list-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            padding: 20px;
+            font-size: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+        }
+
+        .list-item:hover .event-name {
+            color: #f00;
+        }
+
+        .date {
+            font-family: formula1;
+        }
+
+        .event-title {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .event {
+            text-align: right;
+            flex: 1;
+        }
+
+        .event-name {
+            color: #7d7d7d;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .large-item {
+            display: none;
+            grid-row: 3 / span 4;
+            grid-column: 2 / 4;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .large-item.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #click {
+            display: none;
+        }
+
+        #click.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .grid-container {
+            display: grid;
+            /* padding: 20px; */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            justify-items: center;
+        }
+
+        .card {
+            margin: 20px;
+            align-self: center;
+        }
+
+        /* #large-0 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .text {
+            font-family: formula1;
+            color: #000;
+        }
+
+        .gold {
+            grid-row: 1 / 5;
+            grid-column: 2;
+            background-color: #ffd700;
+            box-shadow:
+                /* inner white */
+                inset 0 0 10px #fff,
+                /* inner left light short */
+                inset 4px 0 16px #d19e1d,
+                /* inner right dark short */
+                inset -4px 0 16px #e3a812,
+                /* inner left light broad */
+                inset 4px 0 60px #d18e1d,
+                /* inner right dark broad */
+                inset -4px 0 60px #e3a812,
+                /* outer white */
+                0 0 10px #fff,
+                /* outer left dark */
+                -2px 0 16px #d19e1d,
+                /* outer right light */
+                2px 0 16px #e3a812;
+        }
+
+        .silver {
+            grid-row: 2 / 6;
+            grid-column: 1;
+            background-color: #c0c0c0;
+            box-shadow:
+                /* inner white */
+                inset 0 0 10px #c0c0c0,
+                /* inner left light short */
+                inset 4px 0 16px #ededed,
+                /* inner right dark short */
+                inset -4px 0 16px #bdbdbd,
+                /* inner left light broad */
+                inset 4px 0 60px #ededed,
+                /* inner right dark broad */
+                inset -4px 0 60px #bdbdbd,
+                /* outer white */
+                0 0 10px #c0c0c0,
+                /* outer left dark */
+                -2px 0 16px #ededed,
+                /* outer right light */
+                2px 0 16px #bdbdbd;
+        }
+
+        .bronze {
+            grid-row: 3 / 7;
+            grid-column: 3;
+            background-color: #cd7f32;
+            box-shadow:
+                /* inner white */
+                inset 0 0 10px #cd7f32,
+                /* inner left light short */
+                inset 4px 0 16px #db6c2b,
+                /* inner right dark short */
+                inset -4px 0 16px #673208,
+                /* inner left light broad */
+                inset 4px 0 60px #db6c2b,
+                /* inner right dark broad */
+                inset -4px 0 60px #673208,
+                /* outer white */
+                0 0 10px #cd7f32,
+                /* outer left dark */
+                -2px 0 16px #db6c2b,
+                /* outer right light */
+                2px 0 16px #673208;
+        }
+
+        .card-title {
+            font-family: formula1bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/logo.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="venue.html">Venues</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="schedule.html">Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="drivers.html">Drivers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="teams.html">Teams</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="loading">
+            <div class="spinner-border text-primary" role="status" id="loader">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="heading">F1 Schedule 2024</div>
+        <div class="content">
+            <div class="schedule-list">
+                <div class="list-item" data-id="0">
+                    <div class="event-title">
+                        <div class="date">21/02-23/02</div>
+                        <div class="event">Testing</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 ARAMCO PRE-SEASON TESTING 2024</div>
+                </div>
+                <div class="large-item" data-id="0" id="click">
+                    <div class="podium">
+                        <div class="text">Click a Race to view Podiums</div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="1">
+                    <div class="event-title">
+                        <div class="date">29/02-02/03</div>
+                        <div class="event">Round 1</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 GULF AIR BAHRAIN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="1" id="large-1">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/serper01.avif" class="card-img-top" alt="Sergio Perez">
+                            <div class="card-body">
+                                <h5 class="card-title">PER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="2">
+                    <div class="event-title">
+                        <div class="date">07/03-09/03</div>
+                        <div class="event">Round 2</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 STC SAUDI ARABIAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="2" id="large-2">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/serper01.avif" class="card-img-top" alt="Sergio Perez">
+                            <div class="card-body">
+                                <h5 class="card-title">PER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item ferrari" data-id="3">
+                    <div class="event-title">
+                        <div class="date">22/03-24/03</div>
+                        <div class="event">Round 3</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 ROLEX AUSTRALIAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="3" id="large-3">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="4">
+                    <div class="event-title">
+                        <div class="date">05/04-07/04</div>
+                        <div class="event">Round 4</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 MSC CRUISES JAPANESE GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="4" id="large-4">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/serper01.avif" class="card-img-top" alt="Sergio Perez">
+                            <div class="card-body">
+                                <h5 class="card-title">PER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="5">
+                    <div class="event-title">
+                        <div class="date">19/04-21/04</div>
+                        <div class="event">Round 5</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 LENOVO CHINESE GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="5" id="large-5">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/serper01.avif" class="card-img-top" alt="Sergio Perez">
+                            <div class="card-body">
+                                <h5 class="card-title">PER</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="6">
+                    <div class="event-title">
+                        <div class="date">03/05-05/05</div>
+                        <div class="event">Round 6</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 CRYPTO.COM MIAMI GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="6" id="large-6">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="7">
+                    <div class="event-title">
+                        <div class="date">17/05-19/05</div>
+                        <div class="event">Round 7</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 MSC CRUISES GRAN PREMIO DEL MADE IN ITALY E DELL'EMILIA-ROMAGNA
+                        2024</div>
+                </div>
+                <div class="large-item" data-id="7" id="large-7">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item ferrari" data-id="8">
+                    <div class="event-title">
+                        <div class="date">24/05-26/05</div>
+                        <div class="event">Round 8</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 GRAND PRIX DE MONACO 2024</div>
+                </div>
+                <div class="large-item" data-id="8" id="large-8">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="9">
+                    <div class="event-title">
+                        <div class="date">07/06-09/06</div>
+                        <div class="event">Round 9</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 AWS GRAND PRIX DU CANADA 2024</div>
+                </div>
+                <div class="large-item" data-id="9" id="large-9">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/georus01.avif" class="card-img-top" alt="George Russell">
+                            <div class="card-body">
+                                <h5 class="card-title">RUS</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="10">
+                    <div class="event-title">
+                        <div class="date">21/06-23/06</div>
+                        <div class="event">Round 10</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 ARAMCO GRAN PREMIO DE ESPAÑA 2024</div>
+                </div>
+                <div class="large-item" data-id="10" id="large-10">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                            <div class="card-body">
+                                <h5 class="card-title">HAM</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mercedes" data-id="11">
+                    <div class="event-title">
+                        <div class="date">28/06-30/06</div>
+                        <div class="event">Round 11</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 QATAR AIRWAYS AUSTRIAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="11" id="large-11">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/georus01.avif" class="card-img-top" alt="George Russell">
+                            <div class="card-body">
+                                <h5 class="card-title">RUS</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mercedes" data-id="12">
+                    <div class="event-title">
+                        <div class="date">05/07-07/07</div>
+                        <div class="event">Round 12</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 QATAR AIRWAYS BRITISH GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="12" id="large-12">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                            <div class="card-body">
+                                <h5 class="card-title">HAM</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="13">
+                    <div class="event-title">
+                        <div class="date">19/07-21/07</div>
+                        <div class="event">Round 13</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 HUNGARIAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="13" id="large-13">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                            <div class="card-body">
+                                <h5 class="card-title">HAM</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mercedes" data-id="14">
+                    <div class="event-title">
+                        <div class="date">26/07-28/07</div>
+                        <div class="event">Round 14</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 ROLEX BELGIAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="14" id="large-14">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                            <div class="card-body">
+                                <h5 class="card-title">HAM</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="15">
+                    <div class="event-title">
+                        <div class="date">23/08-25/08</div>
+                        <div class="event">Round 15</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 HEINEKEN DUTCH GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="15" id="large-15">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="CHarles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item ferrari" data-id="16">
+                    <div class="event-title">
+                        <div class="date">30/08-01/09</div>
+                        <div class="event">Round 16</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 PIRELLI GRAN PREMIO D’ITALIA 2024</div>
+                </div>
+                <div class="large-item" data-id="16" id="large-16">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="17">
+                    <div class="event-title">
+                        <div class="date">13/09-15/09</div>
+                        <div class="event">Round 17</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 QATAR AIRWAYS AZERBAIJAN GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="17" id="large-17">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/georus01.avif" class="card-img-top" alt="George Russell">
+                            <div class="card-body">
+                                <h5 class="card-title">RUS</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="18">
+                    <div class="event-title">
+                        <div class="date">20/09-22/09</div>
+                        <div class="event">Round 18</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 SINGAPORE AIRLINES SINGAPORE GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="18" id="large-18">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item ferrari" data-id="19">
+                    <div class="event-title">
+                        <div class="date">18/10-20/10</div>
+                        <div class="event">Round 19</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="19" id="large-19">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item ferrari" data-id="20">
+                    <div class="event-title">
+                        <div class="date">25/10-27/10</div>
+                        <div class="event">Round 20</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 GRAN PREMIO DE LA CIUDAD DE MÉXICO 2024</div>
+                </div>
+                <div class="large-item" data-id="20" id="large-20">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="21">
+                    <div class="event-title">
+                        <div class="date">01/10-03/10</div>
+                        <div class="event">Round 21</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 LENOVO GRANDE PRÊMIO DE SÃO PAULO 2024</div>
+                </div>
+                <div class="large-item" data-id="21" id="large-21">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/estoco01.avif" class="card-img-top" alt="Esteban Ocon">
+                            <div class="card-body">
+                                <h5 class="card-title">OCO</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/piegas01.avif" class="card-img-top" alt="Pierre Gasly">
+                            <div class="card-body">
+                                <h5 class="card-title">GAS</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mercedes" data-id="22">
+                    <div class="event-title">
+                        <div class="date">21/11-23/11</div>
+                        <div class="event">Round 22</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 HEINEKEN SILVER LAS VEGAS GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="22" id="large-22">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                            <div class="card-body">
+                                <h5 class="card-title">HAM</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/georus01.avif" class="card-img-top" alt="George Russell">
+                            <div class="card-body">
+                                <h5 class="card-title">RUS</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item redbull" data-id="23">
+                    <div class="event-title">
+                        <div class="date">29/11-01/12</div>
+                        <div class="event">Round 23</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 QATAR AIRWAYS QATAR GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="23" id="large-23">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                            <div class="card-body">
+                                <h5 class="card-title">VER</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                            <div class="card-body">
+                                <h5 class="card-title">PIA</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item mclaren" data-id="24">
+                    <div class="event-title">
+                        <div class="date">06/12-08/12</div>
+                        <div class="event">Round 24</div>
+                    </div>
+                    <div class="event-name">FORMULA 1 ETHIAD AIRWAYS ABU DHABI GRAND PRIX 2024</div>
+                </div>
+                <div class="large-item" data-id="24" id="large-24">
+                    <div class="grid-container podium">
+                        <div class="card silver" style="width: 12rem;">
+                            <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                            <div class="card-body">
+                                <h5 class="card-title">SAI</h5>
+                            </div>
+                        </div>
+                        <div class="card gold" style="width: 12rem;">
+                            <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                            <div class="card-body">
+                                <h5 class="card-title">NOR</h5>
+                            </div>
+                        </div>
+                        <div class="card bronze" style="width: 12rem;">
+                            <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                            <div class="card-body">
+                                <h5 class="card-title">LEC</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function handleexpandedcontent(event) {
+            // Handle click events for grid items
+            if (event.type === 'click') {
+                const item = event.target.closest('.list-item');
+                console.log(item);
+
+                const id = parseInt(item.dataset.id); // Ensure it's a number
+                console.log(id);
+                const def = document.getElementById('click');
+                const expandedContent = document.getElementById(`large-${id}`);
+
+                // Hide all other expanded contents
+                document.querySelectorAll('.large-item').forEach((content) => {
+                    if (content !== expandedContent) {
+                        content.classList.remove('show'); // Remove 'show' class
+                        def.classList.add('show');
+                    }
+                });
+
+                // Toggle visibility of the clicked item's expanded content
+                if (expandedContent.classList.contains('show')) {
+                    expandedContent.classList.remove('show');
+                    def.classList.add('show');
+                } else {
+                    expandedContent.classList.add('show');
+                    def.classList.remove('show');
+                }
+            }
+        }
+
+        // Attach event listener
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                document.querySelector("body").style.visibility = "hidden";
+                document.querySelector("#loader").style.visibility = "visible";
+            } else {
+                document.querySelector("#loader").style.display = "none";
+                document.querySelector("body").style.visibility = "visible";
+            }
+        };
+        document.addEventListener("DOMContentLoaded", () => {
+            const def = document.getElementById('click');
+            def.classList.add('show');
+        });
+        window.addEventListener('resize', () => {
+            const def = document.getElementById('click');
+            document.querySelectorAll('.large-item').forEach((content) => {
+                content.classList.remove('show');
+            });
+            def.classList.add('show');
+        });
+        document.querySelectorAll('.list-item').forEach((item) => {
+            item.addEventListener('click', handleexpandedcontent); // Handle item clicks
+        });
+    </script>
+</body>
+
+</html>

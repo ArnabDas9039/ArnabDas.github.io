@@ -13,7 +13,18 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 2;
+    display: flex;
+}
+.logo{
+    padding: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.logo-image{
+    height: 56px;
+    width: 56px;
+    border-radius: 28px;
 }
 @media (min-width: 600px) and (max-width: 1200px){
     body{
@@ -32,12 +43,17 @@ body{
         padding-left: 0px;
     }
     .body{
-        padding-top: 40%;
+        /* padding-top: 40%; */
     }
     .logo-section{
-        top: 10%;
-        left: 50%;
-        right: 50%;
+        position: absolute;
+    }
+    .logo-image{
+        height: 40px;
+        width: 40px;
+    }
+    .header{
+        padding-left: 60px;
     }
 }
 div::-webkit-scrollbar{

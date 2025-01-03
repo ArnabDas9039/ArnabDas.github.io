@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/general.css">
-    <link rel="stylesheet" type="text/css" href="styles/playing.css">
+    <link rel="stylesheet" type="text/css" href="styles/info.css">
     <link rel="stylesheet" type="text/css" href="styles/header.css">
     <link rel="stylesheet" type="text/css" href="styles/navigation.css">
     <title>Harmonics v1</title>
@@ -16,7 +16,7 @@
 <div class="body">
     <div class="header">
         <div class="left-section">
-            <div class="top-destination"><b>Home</b></div>
+            <!-- <div class="top-destination"><b>Home</b></div> -->
         </div>
         <div class="right-section">
             <div class="icon search-icon">
@@ -38,24 +38,30 @@
         <!-- <div>Harmonics</div> -->
     </div>
     <div class="navigation">
+        <a href="main.html">
         <div class="nav-button">
             <div class="icon">
                 <img src="icons/home.svg" class="icon-image">
             </div>
             <div class="icon-label">Home</div>
         </div>
+        </a>
+        <a href="explore.html">
         <div class="nav-button">
             <div class="icon">
                 <img src="icons/explore.svg" class="icon-image">
             </div>
             <div class="icon-label">Explore</div>
         </div>
+        </a>
+        <a href="library.html">
         <div class="nav-button">
             <div class="icon">
                 <img src="icons/library.svg" class="icon-image">
             </div>
             <div class="icon-label">Library</div>
         </div>
+        </a>
         <div class="playlists">
             <div class="nav-button">
                 <div class="playlist-label">Playlist 1</div>
@@ -75,26 +81,19 @@
             </div>
         </div>
     </div>
-    <div class="playing">
-        <div class="play">
-            <div class="large-thumbnail"></div>
+    <div class="info">
+        <div class="thumbnail-section">
+            <div class="large-thumbnail"><img class = "large-thumbnail-image" src="thumbnails/thumbnail_2.jpg"></div>
         </div>
-        <div class="options">Up next</div>
-        <div class="options">Lyrics</div>
-        <div class="options">Related</div>
-        <div class="upnext-list">
-            <div class="list-item">Item 1</div>
-            <div class="list-item">Item 2</div>
-            <div class="list-item">Item 3</div>
-            <div class="list-item">Item 4</div>
-            <div class="list-item">Item 5</div>
-            <div class="list-item">Item 6</div>
-            <div class="list-item">Item 7</div>
-            <div class="list-item">Item 8</div>
-            <div class="list-item">Item 9</div>
-            <div class="list-item">Item 10</div>
+        <div class="info-section">
+            <div class="song-name">Song 1</div>
+            <div class="options">
+                <div class="button">Play</div>
+                <div class="button">add to playlist</div>
+                <div class="button">add to queue</div>
+            </div>
+            <div class="artist-name">Artist 1</div>
         </div>
-        <div class="play-controls"></div>
     </div>
 </div>
 </body>

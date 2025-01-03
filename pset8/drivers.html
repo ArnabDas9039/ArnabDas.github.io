@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<html lang="en" data-bs-theme="dark">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link href="styles.css" rel="stylesheet">
+    <title>Teams</title>
+    <style type="text/css">
+        .grid-container-podium {
+            display: grid;
+            padding: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            justify-items: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            justify-items: center;
+        }
+
+        .card {
+            margin: 20px;
+            align-self: center;
+        }
+
+        .card-title {
+            font-family: formula1;
+            text-align: center;
+        }
+
+        .gold {
+            grid-row: 1 / 7;
+            grid-column: 2;
+            background-color: #ffd700;
+            box-shadow:
+                /* inner white */
+                inset 0 0 50px #fff,
+                /* inner left light short */
+                inset 20px 0 80px #d19e1d,
+                /* inner right dark short */
+                inset -20px 0 80px #e3a812,
+                /* inner left light broad */
+                inset 20px 0 300px #d18e1d,
+                /* inner right dark broad */
+                inset -20px 0 300px #e3a812,
+                /* outer white */
+                0 0 50px #fff,
+                /* outer left dark */
+                -10px 0 80px #d19e1d,
+                /* outer right light */
+                10px 0 80px #e3a812;
+        }
+
+        .silver {
+            grid-row: 2 / 8;
+            grid-column: 1;
+            background-color: #c0c0c0;
+            box-shadow:
+                /* inner white */
+                inset 0 0 50px #c0c0c0,
+                /* inner left light short */
+                inset 20px 0 80px #ededed,
+                /* inner right dark short */
+                inset -20px 0 80px #bdbdbd,
+                /* inner left light broad */
+                inset 20px 0 300px #ededed,
+                /* inner right dark broad */
+                inset -20px 0 300px #bdbdbd,
+                /* outer white */
+                0 0 50px #c0c0c0,
+                /* outer left dark */
+                -10px 0 80px #ededed,
+                /* outer right light */
+                10px 0 80px #bdbdbd;
+        }
+
+        .bronze {
+            grid-row: 3 / 9;
+            grid-column: 3;
+            background-color: #cd7f32;
+            box-shadow:
+                /* inner white */
+                inset 0 0 50px #cd7f32,
+                /* inner left light short */
+                inset 20px 0 80px #db6c2b,
+                /* inner right dark short */
+                inset -20px 0 80px #673208,
+                /* inner left light broad */
+                inset 20px 0 300px #db6c2b,
+                /* inner right dark broad */
+                inset -20px 0 300px #673208,
+                /* outer white */
+                0 0 50px #cd7f32,
+                /* outer left dark */
+                -10px 0 80px #db6c2b,
+                /* outer right light */
+                10px 0 80px #673208;
+        }
+
+        .list-pair {
+            display: flex;
+            align-items: center;
+        }
+
+        .key {
+            text-align: left;
+            flex: 1;
+        }
+
+        .value {
+            text-align: right;
+            font-weight: 600;
+            font-family: formula1;
+            color: darkgray;
+        }
+
+        .points {
+            color: black;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/logo.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="venue.html">Venues</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="schedule.html">Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="drivers.html">Drivers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="teams.html">Teams</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="heading">F1 Drivers 2024</div>
+        <div class="content grid-container-podium">
+            <div class="card silver mclaren" style="width: 18rem;">
+                <img src="images/drivers/lannor01.avif" class="card-img-top" alt="Lando Norris">
+                <div class="card-body">
+                    <h5 class="card-title">Lando Norris</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">McLaren</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">374</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card gold redbull" style="width: 18rem;">
+                <img src="images/drivers/maxver01.avif" class="card-img-top" alt="Max Verstappen">
+                <div class="card-body">
+                    <h5 class="card-title">Max Verstappen</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Red Bull Racing</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">437</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card bronze ferrari" style="width: 18rem;">
+                <img src="images/drivers/chalec01.avif" class="card-img-top" alt="Charles Lecrec">
+                <div class="card-body">
+                    <h5 class="card-title">Charles Lecrec</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Ferrari</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">356</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="card mclaren" style="width: 18rem;">
+                <img src="images/drivers/oscpia01.avif" class="card-img-top" alt="Oscar Piastri">
+                <div class="card-body">
+                    <h5 class="card-title">Oscar Piastri</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">McLaren</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">292</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card ferrari" style="width: 18rem;">
+                <img src="images/drivers/carsai01.avif" class="card-img-top" alt="Carlos Sainz">
+                <div class="card-body">
+                    <h5 class="card-title">Carlos Sainz</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Ferrari</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">290</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card mercedes" style="width: 18rem;">
+                <img src="images/drivers/georus01.avif" class="card-img-top" alt="George Russell">
+                <div class="card-body">
+                    <h5 class="card-title">George Russell</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Mercedes</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">245</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card mercedes" style="width: 18rem;">
+                <img src="images/drivers/lewham01.avif" class="card-img-top" alt="Lewis Hamilton">
+                <div class="card-body">
+                    <h5 class="card-title">Lewis Hamilton</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Mercedes</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">223</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card redbull" style="width: 18rem;">
+                <img src="images/drivers/serper01.avif" class="card-img-top" alt="Sergio Perez">
+                <div class="card-body">
+                    <h5 class="card-title">Sergio Perez</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Red Bull Racing</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">152</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card aston" style="width: 18rem;">
+                <img src="images/drivers/feralo01.avif" class="card-img-top" alt="Fernando Alonso">
+                <div class="card-body">
+                    <h5 class="card-title">Fernando Alonso</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Aston Martin</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">70</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card alpine" style="width: 18rem;">
+                <img src="images/drivers/piegas01.avif" class="card-img-top" alt="Pierre Gasly">
+                <div class="card-body">
+                    <h5 class="card-title">Pierre Gasly</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Alpine</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">42</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card haas" style="width: 18rem;">
+                <img src="images/drivers/nichul01.avif" class="card-img-top" alt="Nico Hulkenberg">
+                <div class="card-body">
+                    <h5 class="card-title">Nico Hulkenberg</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Haas</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">41</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card rb" style="width: 18rem;">
+                <img src="images/drivers/yuktsu01.avif" class="card-img-top" alt="Yuki Tsunoda">
+                <div class="card-body">
+                    <h5 class="card-title">Yuki Tsunoda</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">RB</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">30</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card aston" style="width: 18rem;">
+                <img src="images/drivers/lanstr01.avif" class="card-img-top" alt="Lance Stroll">
+                <div class="card-body">
+                    <h5 class="card-title">Lance Stroll</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Aston Martin</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">24</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card alpine" style="width: 18rem;">
+                <img src="images/drivers/estoco01.avif" class="card-img-top" alt="Esteban Ocon">
+                <div class="card-body">
+                    <h5 class="card-title">Esteban Ocon</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Alpine</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">23</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card haas" style="width: 18rem;">
+                <img src="images/drivers/kevmag01.avif" class="card-img-top" alt="Kevin Magnussen">
+                <div class="card-body">
+                    <h5 class="card-title">Kevin Magnussen</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Haas</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">16</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card williams" style="width: 18rem;">
+                <img src="images/drivers/alealb01.avif" class="card-img-top" alt="Alexander Albon">
+                <div class="card-body">
+                    <h5 class="card-title">Alexander Albon</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Williams</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">12</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card rb" style="width: 18rem;">
+                <img src="images/drivers/danric01.avif" class="card-img-top" alt="Daniel Ricciardo">
+                <div class="card-body">
+                    <h5 class="card-title">Daniel Ricciardo</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">RB</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">12</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card haas" style="width: 18rem;">
+                <img src="images/drivers/olibea01.avif" class="card-img-top" alt="Oliver Bearmen">
+                <div class="card-body">
+                    <h5 class="card-title">Oliver Bearmen</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Haas</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">7</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card williams" style="width: 18rem;">
+                <img src="images/drivers/fracol01.avif" class="card-img-top" alt="Franco Colapinto">
+                <div class="card-body">
+                    <h5 class="card-title">Franco Colapinto</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Williams</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">5</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card kick" style="width: 18rem;">
+                <img src="images/drivers/guazho01.avif" class="card-img-top" alt="Zhou Guanyu">
+                <div class="card-body">
+                    <h5 class="card-title">Zhou Guanyu</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Kick Sauber</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">4</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card rb" style="width: 18rem;">
+                <img src="images/drivers/lialaw01.avif" class="card-img-top" alt="Liam Lawson">
+                <div class="card-body">
+                    <h5 class="card-title">Liam Lawson</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">RB</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">4</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card kick" style="width: 18rem;">
+                <img src="images/drivers/valbot01.avif" class="card-img-top" alt="Valtteri Bottas">
+                <div class="card-body">
+                    <h5 class="card-title">Valtteri Bottas</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Kick Sauber</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">0</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card williams" style="width: 18rem;">
+                <img src="images/drivers/logsar01.avif" class="card-img-top" alt="Logan Sargeant">
+                <div class="card-body">
+                    <h5 class="card-title">Logan Sargeant</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">WIlliams</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">0</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card alpine" style="width: 18rem;">
+                <img src="images/drivers/jacdoo01.avif" class="card-img-top" alt="Jack Doohan">
+                <div class="card-body">
+                    <h5 class="card-title">Jack Doohan</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Team</div>
+                            <div class="value">Alpine</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Points</div>
+                            <div class="value points">0</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-pair">
+                            <div class="key">Nationality</div>
+                            <div class="value"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -6,6 +6,11 @@
     transition: width 0.15s;
     z-index: 1;
 }
+.navigation a{
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
 .nav-button{
     display: flex;
     padding: 6px 0 6px 0;
@@ -17,8 +22,7 @@
     font-size: 16px;
 }
 .playlists{
-    position: absolute;
-    opacity: 0;
+    display: none;
 }
 
 /* Navigation Rail */
@@ -103,10 +107,17 @@
         width: 100%;
     }
     .playlists .nav-button{
-        justify-content: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        /* padding-left: 40px; */
     }
     .playlist-label{
-        padding: 40px;
+        padding-left: 16px;
+    }
+    .playlist-des{
+        padding-left: 16px;
     }
 }
 
